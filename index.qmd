@@ -1,5 +1,5 @@
 ---
-title: "How Machine Learning Can Help Doctors Prevent Seizures"
+title: "The Data Science Blog"
 listing:
   contents: posts
   feed: true

@@ -4,14 +4,15 @@ project:
 website:
   description: "A blog built with Quarto"
   site-url: https://your-website-url.example.com # you must change this appropriately for RSS feeds to work properly
-  title: "How Machine Learning Can Help Doctors Prevent Seizures"
+  title: "The Data Science Blog"
   navbar:
     right:
       - about.qmd
+      - icon: linkedin
+        href: https://www.linkedin.com/in/eric-yang2/
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: https://github.com/EricYangg
+
 format:
   html:
     theme:
