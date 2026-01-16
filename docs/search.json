@@ -14,13 +14,6 @@
     "text": "Can computers predict the unpredictable? Learn how data science is being used to analyze brain signals and provide early warnings for epilepsy patients."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "The Data Science Blog",
-    "section": "",
-    "text": "How Machine Learning Can Help Doctors Prevent Seizures\n\n\n\nMachine Learning\n\nHealth Tech\n\nExplanation\n\n\n\n\n\n\n\n\n\nJan 13, 2026\n\n\nEric Yang\n\n\n\n\n\nNo matching items"
-  },
-  {
     "objectID": "posts/welcome/index.html#what-is-the-model-looking-at",
     "href": "posts/welcome/index.html#what-is-the-model-looking-at",
     "title": "How Machine Learning Can Help Doctors Prevent Seizures",
@@ -33,5 +26,12 @@
     "title": "How Machine Learning Can Help Doctors Prevent Seizures",
     "section": "Looking Ahead",
     "text": "Looking Ahead\nDespite these hurdles, applying data science to EEG signals represents a massive leap forward from the current standard of care. As models become more sophisticated and personalized to individual patients, we move closer to a future where epilepsy management is proactive rather than reactive—giving control back to the patients."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "The Data Science Blog",
+    "section": "",
+    "text": "How Machine Learning Can Help Doctors Prevent Seizures\n\n\n\nMachine Learning\n\nHealth Tech\n\nExplanation\n\n\n\n\n\n\n\n\n\nJan 13, 2026\n\n\nEric Yang\n\n\n\n\n\nNo matching items"
   }
 ]
