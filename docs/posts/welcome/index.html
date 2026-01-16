@@ -159,9 +159,15 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#introduction-the-challenge-of-unpredictability" id="toc-introduction-the-challenge-of-unpredictability" class="nav-link active" data-scroll-target="#introduction-the-challenge-of-unpredictability">Introduction: The Challenge of Unpredictability</a></li>
   <li><a href="#treating-brain-signals-as-data" id="toc-treating-brain-signals-as-data" class="nav-link" data-scroll-target="#treating-brain-signals-as-data">Treating Brain Signals as Data</a></li>
-  <li><a href="#how-the-machine-learning-model-works" id="toc-how-the-machine-learning-model-works" class="nav-link" data-scroll-target="#how-the-machine-learning-model-works">How the Machine Learning Model Works</a></li>
+  <li><a href="#how-the-machine-learning-model-works" id="toc-how-the-machine-learning-model-works" class="nav-link" data-scroll-target="#how-the-machine-learning-model-works">How the Machine Learning Model Works</a>
+  <ul class="collapse">
+  <li><a href="#what-is-the-model-looking-at" id="toc-what-is-the-model-looking-at" class="nav-link" data-scroll-target="#what-is-the-model-looking-at">What is the Model Looking At?</a></li>
+  </ul></li>
   <li><a href="#from-raw-signals-to-real-time-alerts" id="toc-from-raw-signals-to-real-time-alerts" class="nav-link" data-scroll-target="#from-raw-signals-to-real-time-alerts">From Raw Signals to Real-Time Alerts</a></li>
-  <li><a href="#conclusion-potential-and-limitations" id="toc-conclusion-potential-and-limitations" class="nav-link" data-scroll-target="#conclusion-potential-and-limitations">Conclusion: Potential and Limitations</a></li>
+  <li><a href="#conclusion-potential-and-limitations" id="toc-conclusion-potential-and-limitations" class="nav-link" data-scroll-target="#conclusion-potential-and-limitations">Conclusion: Potential and Limitations</a>
+  <ul class="collapse">
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking Ahead</a></li>
+  </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -183,6 +189,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="introduction-the-challenge-of-unpredictability" class="level1">
 <h1>Introduction: The Challenge of Unpredictability</h1>
 <p>For people with epilepsy, the unpredictability of seizures is a major source of anxiety and risk. Knowing when a seizure might occur, even minutes in advance, could allow patients to get to a safe place or alert their caregivers, significantly improving safety and quality of life. This is where data science, specifically machine learning, can play a transformative role.</p>
+<p>Beyond the immediate health risks, this uncertainty forces many patients to live with severe restrictions. Simple daily activities that many take for granted—like driving a car, swimming, or even cooking on a hot stove—can become dangerous life-threatening situations if a seizure strikes without warning. This constant vigilance can lead to social isolation and anxiety. A reliable warning system offering even a 30-minute lead time wouldn’t just prevent injury, it could restore a sense of autonomy, allowing patients to navigate their day with confidence knowing they will have time to reach safety or take medication if a seizure is imminent.</p>
 <p>Currently, doctors use electroencephalography (EEG) to track brain activity by measuring electrical signals from the scalp. While they are expert at visually analyzing these readings, long-term recordings generate massive amounts of data. Reviewing this vast quantity of information to consistently identify subtle, complex patterns is an incredibly difficult and time-consuming task for any human [1].</p>
 </section>
 <section id="treating-brain-signals-as-data" class="level1">
@@ -209,6 +216,17 @@ Figure&nbsp;1: A comparison of EEG signals showing the transition from a ‘Norm
 </ol>
 <p>Over time, the model learns to recognize the distinct, high-dimensional patterns associated with an increased risk of a seizure. It’s not about memorizing specific traces, but learning the underlying characteristics that differentiate a “stable” brain state from a “pre-seizure” state.</p>
 <p>Instead of making a definite “yes/no” prediction, the model estimates the likelihood that a seizure may occur soon. As new EEG data is collected continuously from a patient, this risk score is updated in real-time.</p>
+<section id="what-is-the-model-looking-at" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-the-model-looking-at">What is the Model Looking At?</h2>
+<p>To a computer, a raw EEG signal is just a massive list of voltage numbers, which can be noisy and difficult to interpret directly. To solve this, data scientists use a process called Feature Extraction.</p>
+<p>Instead of feeding raw signals into the model, we calculate specific mathematical summaries that describe the signal’s behavior over short windows of time (e.g., every 5 seconds). Common features include:</p>
+<ul>
+<li>Spectral Power: Measuring how much ‘energy’ is in different frequency bands (like Alpha, Beta, or Gamma waves). A sudden shift in energy from low to high frequencies can be a warning sign.</li>
+<li>Entropy: This measures the ‘randomness’ or complexity of the brain signal. Seizures are often characterized by highly synchronized, rhythmic electrical activity, which looks very different mathematically from the ‘chaotic’ buzz of a normal waking brain.</li>
+<li>Correlation: Analyzing how different parts of the brain are ‘talking’ to each other. If multiple channels suddenly sync up perfectly, it might indicate the start of a seizure.</li>
+</ul>
+<p>By focusing on these features, the machine learning model can ignore the static noise and focus on the meaningful changes in brain state.</p>
+</section>
 </section>
 <section id="from-raw-signals-to-real-time-alerts" class="level1">
 <h1>From Raw Signals to Real-Time Alerts</h1>
@@ -228,8 +246,12 @@ Figure&nbsp;2: Simplified flow of how EEG data is processed using data science t
 </section>
 <section id="conclusion-potential-and-limitations" class="level1">
 <h1>Conclusion: Potential and Limitations</h1>
-<p>While promising, we must also consider the limitations. Predictions are never perfectly accurate, and false alarms can occur, which could lead to alert fatigue. Furthermore, brain data is highly sensitive, raising important privacy concerns that must be addressed in any deployed system.</p>
-<p>Despite these hurdles, applying data science to EEG signals shows strong potential to move us from reactive to proactive epilepsy management, ultimately improving safety, independence, and quality of life for those affected.</p>
+<p>While promising, deploying these systems in the real world comes with significant challenges. The most critical is the trade-off between sensitivity (catching every seizure) and specificity (avoiding false alarms).</p>
+<p>If a model is too sensitive, it might flag normal activities—like brushing teeth or rapid blinking—as a pre-seizure pattern. This leads to the ‘Boy Who Cried Wolf’ problem, also known as alert fatigue. If a patient’s device buzzes five times a day when nothing is wrong, they will eventually stop trusting it or turn it off entirely, rendering the system useless.</p>
+<section id="looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="looking-ahead">Looking Ahead</h2>
+<p>Despite these hurdles, applying data science to EEG signals represents a massive leap forward from the current standard of care. As models become more sophisticated and personalized to individual patients, we move closer to a future where epilepsy management is proactive rather than reactive—giving control back to the patients.</p>
+</section>
 </section>
 <section id="references" class="level1">
 <h1>References</h1>
